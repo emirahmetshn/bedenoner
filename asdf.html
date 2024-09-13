@@ -10,15 +10,31 @@
             background-color: #f4f4f4;
             color: #333;
             margin: 0;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            color: #000;
         }
+
         .slider-container {
-            margin: 15px 0;
+            margin: 20px 0;
         }
+
         .slider {
             width: 100%;
             -webkit-appearance: none;
@@ -29,6 +45,7 @@
             cursor: pointer;
             transition: background 0.3s ease;
         }
+
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -38,6 +55,7 @@
             border-radius: 50%;
             cursor: pointer;
         }
+
         .slider::-moz-range-thumb {
             background: #000;
             height: 20px;
@@ -45,12 +63,14 @@
             border-radius: 50%;
             cursor: pointer;
         }
+
         .label {
             display: flex;
             justify-content: space-between;
             margin: 10px 0;
             color: #666;
         }
+
         .button {
             background-color: #000;
             color: white;
@@ -62,9 +82,11 @@
             margin-top: 20px;
             transition: background-color 0.3s ease;
         }
+
         .button:hover {
             background-color: #333;
         }
+
         .result {
             margin-top: 20px;
             font-size: 18px;
@@ -75,29 +97,31 @@
 </head>
 <body>
 
-    <h1>Bedenimi Bul</h1>
+    <div class="container">
+        <h1>Bedenimi Bul</h1>
 
-    <div class="slider-container">
-        <label for="height">Boy (cm)</label>
-        <div class="label">
-            <span id="heightValue">155</span>
-            <span id="heightLabel">210</span>
+        <div class="slider-container">
+            <label for="height">Boy (cm)</label>
+            <div class="label">
+                <span id="heightValue">155</span>
+                <span id="heightLabel">210</span>
+            </div>
+            <input type="range" id="height" class="slider" min="155" max="210" value="155">
         </div>
-        <input type="range" id="height" class="slider" min="155" max="210" value="155">
-    </div>
 
-    <div class="slider-container">
-        <label for="weight">Kilo (kg)</label>
-        <div class="label">
-            <span id="weightValue">40</span>
-            <span id="weightLabel">125</span>
+        <div class="slider-container">
+            <label for="weight">Kilo (kg)</label>
+            <div class="label">
+                <span id="weightValue">40</span>
+                <span id="weightLabel">125</span>
+            </div>
+            <input type="range" id="weight" class="slider" min="40" max="125" value="40">
         </div>
-        <input type="range" id="weight" class="slider" min="40" max="125" value="40">
+
+        <button class="button" id="findSizeButton">Bedenimi Bul</button>
+
+        <div class="result" id="result">Size uygun beden: -</div>
     </div>
-
-    <button class="button" id="findSizeButton">Bedenimi Bul</button>
-
-    <div class="result" id="result">Size uygun beden: -</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
