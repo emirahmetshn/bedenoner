@@ -20,15 +20,16 @@
         }
 
         .tab-container {
-            width: 1324px; /* Genişlik */
-            height: 398px; /* Yükseklik */
+            width: 800px; /* Genişlik */
+            height: 342px; /* Yükseklik */
             background-color: #ffffff; /* İçerik arka plan rengi */
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: none; /* Gölgeyi kaldır */
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
             padding: 0; /* İçerik alanının tam olarak sığması için */
+            margin-top: 10px; /* Sayfanın üst kısmında biraz boşluk bırak */
         }
 
         .tabs {
@@ -58,7 +59,6 @@
             padding: 20px;
             flex: 1; /* İçeriği tüm alanı kaplayacak şekilde ayarla */
             display: none;
-            overflow: hidden; /* Kaydırmayı engellemek için */
         }
 
         .tab-content.active {
@@ -278,6 +278,7 @@
                 const weight = parseInt(weightSlider.value, 10);
                 let size = '';
 
+                // Güncellenmiş beden aralıkları
                 if (height <= 172 && weight < 67) {
                     size = 'S';
                 } else if (height <= 180 && weight < 75) {
@@ -286,8 +287,10 @@
                     size = 'L';
                 } else if (height <= 190 && weight < 93) {
                     size = 'XL';
-                } else if (height >= 200 || weight >= 110) {
+                } else if (height > 190 || weight >= 110) {
                     size = 'XXL';
+                } else {
+                    size = 'Belirlenemedi'; // Belirlenemeyen durumlar için
                 }
 
                 result.textContent = `Size uygun beden: ${size}`;
@@ -295,9 +298,9 @@
 
             heightSlider.addEventListener('input', updateValues);
             weightSlider.addEventListener('input', updateValues);
-
             findSizeButton.addEventListener('click', findSize);
 
+            // Başlangıç değerlerini güncelle
             updateValues();
         });
     </script>
