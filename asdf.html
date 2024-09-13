@@ -21,7 +21,7 @@
 
         .tab-container {
             width: 1200px; /* Enine genişlik */
-            height: 700px; /* Dikine yükseklik */
+            height: 400px; /* Dikine yükseklik */
             background-color: #ffffff; /* İçerik arka plan rengi */
             border-radius: 10px;
             box-shadow: none; /* Gölgeyi kaldır */
@@ -30,6 +30,7 @@
             box-sizing: border-box;
             padding: 0; /* İçerik alanının tam olarak sığması için */
             margin-top: 10px; /* Sayfanın üst kısmında biraz boşluk bırak */
+            overflow-y: hidden; /* Kaydırma çubuğunu gizle */
         }
 
         .tabs {
@@ -37,16 +38,20 @@
             justify-content: flex-start;
             background: #f4f4f4;
             border-bottom: 2px solid #ddd;
+            height: 50px; /* Sekme yüksekliği */
         }
 
         .tab {
-            padding: 10px 20px;
+            padding: 10px 20px; /* Sekme içi boşluk */
             cursor: pointer;
             border-bottom: 2px solid transparent;
             font-weight: 500;
             transition: border-color 0.3s ease;
             border-radius: 5px 5px 0 0; /* Üst köşelere yuvarlatma */
             background: #e0e0e0;
+            font-size: 16px; /* Sekme font boyutu */
+            display: flex;
+            align-items: center; /* İçeriği dikey ortala */
         }
 
         .tab.active {
@@ -56,9 +61,10 @@
         }
 
         .tab-content {
-            padding: 20px;
+            padding: 10px 15px;
             flex: 1; /* İçeriği tüm alanı kaplayacak şekilde ayarla */
             display: none;
+            overflow-y: auto; /* İçeriğin kaydırılabilir olması için */
         }
 
         .tab-content.active {
@@ -66,18 +72,18 @@
         }
 
         h1 {
-            font-size: 20px;
+            font-size: 18px; /* Başlık font boyutu */
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .slider-container {
-            margin: 15px 0;
+            margin: 10px 0;
         }
 
         label {
-            font-size: 14px;
-            margin-bottom: 10px;
+            font-size: 12px; /* Etiket font boyutu */
+            margin-bottom: 5px;
             display: block;
             color: #555;
         }
@@ -86,7 +92,7 @@
             width: 100%;
             appearance: none;
             background: #ddd;
-            height: 6px;
+            height: 4px; /* Kaydırıcı yüksekliği */
             border-radius: 5px;
             outline: none;
             cursor: pointer;
@@ -95,16 +101,16 @@
         .slider::-webkit-slider-thumb {
             appearance: none;
             background: #000;
-            height: 20px;
-            width: 20px;
+            height: 16px; /* Kaydırıcı parmağı yüksekliği */
+            width: 16px; /* Kaydırıcı parmağı genişliği */
             border-radius: 50%;
             cursor: pointer;
         }
 
         .slider::-moz-range-thumb {
             background: #000;
-            height: 20px;
-            width: 20px;
+            height: 16px;
+            width: 16px;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -112,20 +118,20 @@
         .label {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
-            font-size: 12px;
+            margin-top: 5px;
+            font-size: 10px; /* Etiket değer font boyutu */
         }
 
         .button {
             width: 100%;
             background-color: #000;
             color: #fff;
-            padding: 12px 0;
+            padding: 10px 0;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
+            font-size: 14px; /* Buton font boyutu */
+            margin-top: 15px;
             transition: background-color 0.3s ease;
         }
 
@@ -134,8 +140,8 @@
         }
 
         .result {
-            margin-top: 15px;
-            font-size: 16px;
+            margin-top: 10px;
+            font-size: 14px; /* Sonuç font boyutu */
             font-weight: bold;
             text-align: center;
             color: #000;
@@ -144,7 +150,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 10px;
+            font-size: 12px; /* Tablo font boyutu */
         }
 
         table, th, td {
@@ -152,7 +159,7 @@
         }
 
         th, td {
-            padding: 8px;
+            padding: 5px;
             text-align: center;
         }
 
@@ -293,6 +300,7 @@
                     size = 'Beden önerilemiyor'; // Aralıklara uymayan durumlar için
                 }
 
+                // Sonucu doğrudan sayfada gösterme
                 result.textContent = `Size uygun beden: ${size}`;
             }
 
