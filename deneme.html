@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beden Hesaplama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .slider-container {
+            margin: 15px 0;
+        }
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            background: #ccc;
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #000;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+            background: #000;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .label {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            color: #666;
+        }
+        .button {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #333;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bedenimi Bul</h1>
+
+        <div class="slider-container">
+            <label for="height">Boy (cm)</label>
+            <div class="label">
+                <span id="heightValue">155</span>
+                <span id="heightLabel">210</span>
+            </div>
+            <input type="range" id="height" class="slider" min="155" max="210" value="155">
+        </div>
+
+        <div class="slider-container">
+            <label for="weight">Kilo (kg)</label>
+            <div class="label">
+                <span id="weightValue">40</span>
+                <span id="weightLabel">125</span>
+            </div>
+            <input type="range" id="weight" class="slider" min="40" max="125" value="40">
+        </div>
+
+        <button class="button" id="findSizeButton">Bedenimi Bul</button>
+
+        <div class="result" id="result">Size uygun beden: -</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heightSlider = document.getElementById('height');
+            const weightSlider = document.getElementById('weight');
+            const heightValue = document.getElementById('heightValue');
+            const weightValue = document.getElementById('weightValue');
+            const result = document.getElementById('result');
+            const findSizeButton = document.getElementById('findSizeButton');
+
+            // Slider değerlerini güncelle
+            function updateValues() {
+                heightValue.textContent = heightSlider.value;
+                weightValue.textContent = weightSlider.value;
+            }
+
+            // Beden hesaplama fonksiyonu
+            function findSize() {
+                const height = parseInt(heightSlider.value, 10);
+                const weight = parseInt(weightSlider.value, 10);
+                let size = '';
+
+                // Beden hesaplama algoritması
+                if (height <= 170 && weight <= 70) {
+                    size = 'S';
+                } else if (height <= 183 && weight <= 83) {
+                    size = 'M';
+                } else if (height <= 190 && weight <= 87) {
+                    size = 'L';
+                } else if (height <= 200 && weight <= 95) {
+                    size = 'XL';
+                } else {
+                    size = 'XXL';
+                }
+
+                result.textContent = `Size uygun beden: ${size}`;
+            }
+
+            // Slider'lara event listener ekleme
+            heightSlider.addEventListener('input', updateValues);
+            weightSlider.addEventListener('input', updateValues);
+
+            // Butona tıklama event listener ekleme
+            findSizeButton.addEventListener('click', findSize);
+
+            // Sayfa yüklendiğinde slider değerlerini güncelle
+            updateValues();
+        });
+    </script>
+
+</body>
+</html>
