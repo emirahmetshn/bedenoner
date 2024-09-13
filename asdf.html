@@ -4,50 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beden Hesaplama</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
             color: #333;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 0;
         }
 
-        .container {
-            background-color: #fff;
-            padding: 30px;
+        .tab-container {
+            width: 600px; /* Geniş dikdörtgen yapısı için genişliği arttırıldı */
+            margin: 50px auto;
+            background-color: white;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            width: fit-content;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid #000;
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         h1 {
-            font-size: 24px;
+            font-size: 22px;
+            text-align: center;
             margin-bottom: 20px;
-            color: #000;
         }
 
         .slider-container {
             margin: 20px 0;
         }
 
+        label {
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
+            color: #555;
+        }
+
         .slider {
             width: 100%;
-            -webkit-appearance: none;
-            background: #ccc;
-            height: 8px;
+            appearance: none;
+            background: #ddd;
+            height: 6px;
             border-radius: 5px;
             outline: none;
             cursor: pointer;
-            transition: background 0.3s ease;
         }
 
         .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
             appearance: none;
             background: #000;
             height: 20px;
@@ -67,60 +98,130 @@
         .label {
             display: flex;
             justify-content: space-between;
-            margin: 10px 0;
-            color: #666;
+            margin-top: 10px;
+            font-size: 12px;
         }
 
         .button {
+            width: 100%;
             background-color: #000;
-            color: white;
+            color: #fff;
+            padding: 12px 0;
             border: none;
-            padding: 12px 25px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 20px;
+            margin-top: 25px;
             transition: background-color 0.3s ease;
         }
 
         .button:hover {
-            background-color: #333;
+            background-color: #444;
         }
 
         .result {
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            color: #333;
+            text-align: center;
+            color: #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Bedenimi Bul</h1>
-
-        <div class="slider-container">
-            <label for="height">Boy (cm)</label>
-            <div class="label">
-                <span id="heightValue">155</span>
-                <span id="heightLabel">210</span>
-            </div>
-            <input type="range" id="height" class="slider" min="155" max="210" value="155">
+    <div class="tab-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="tab1">Bedenimi Bul</div>
+            <div class="tab" data-tab="tab2">Beden Tablosu</div>
         </div>
 
-        <div class="slider-container">
-            <label for="weight">Kilo (kg)</label>
-            <div class="label">
-                <span id="weightValue">40</span>
-                <span id="weightLabel">125</span>
+        <div id="tab1" class="tab-content active">
+            <h1>Bedenimi Bul</h1>
+            <div class="slider-container">
+                <label for="height">Boy (cm)</label>
+                <input type="range" id="height" class="slider" min="155" max="210" value="179">
+                <div class="label">
+                    <span>155</span>
+                    <span id="heightValue">179</span>
+                    <span>210</span>
+                </div>
             </div>
-            <input type="range" id="weight" class="slider" min="40" max="125" value="40">
+
+            <div class="slider-container">
+                <label for="weight">Kilo (kg)</label>
+                <input type="range" id="weight" class="slider" min="40" max="125" value="70">
+                <div class="label">
+                    <span>40</span>
+                    <span id="weightValue">70</span>
+                    <span>125</span>
+                </div>
+            </div>
+
+            <button class="button" id="findSizeButton">Beden Bul</button>
+
+            <div class="result" id="result">Size uygun beden: -</div>
         </div>
 
-        <button class="button" id="findSizeButton">Bedenimi Bul</button>
-
-        <div class="result" id="result">Size uygun beden: -</div>
+        <div id="tab2" class="tab-content">
+            <h1>Beden Tablosu</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Beden</th>
+                        <th>En (cm)</th>
+                        <th>Boy (cm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S</td>
+                        <td>52</td>
+                        <td>69</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>54</td>
+                        <td>70</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>56.5</td>
+                        <td>71</td>
+                    </tr>
+                    <tr>
+                        <td>XL</td>
+                        <td>59</td>
+                        <td>72</td>
+                    </tr>
+                    <tr>
+                        <td>XXL</td>
+                        <td>61</td>
+                        <td>73</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -131,6 +232,25 @@
             const weightValue = document.getElementById('weightValue');
             const result = document.getElementById('result');
             const findSizeButton = document.getElementById('findSizeButton');
+
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // Tab switching functionality
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.getAttribute('data-tab');
+                    tabContents.forEach(tc => {
+                        tc.classList.remove('active');
+                        if (tc.id === target) {
+                            tc.classList.add('active');
+                        }
+                    });
+                });
+            });
 
             // Slider değerlerini güncelle
             function updateValues() {
@@ -144,30 +264,26 @@
                 const weight = parseInt(weightSlider.value, 10);
                 let size = '';
 
-                // Beden hesaplama algoritması
-                if (height <= 170 && weight <= 70) {
+                if (height <= 172 && weight < 67) {
                     size = 'S';
-                } else if (height <= 183 && weight <= 83) {
+                } else if (height <= 180 && weight < 75) {
                     size = 'M';
-                } else if (height <= 190 && weight <= 87) {
+                } else if (height <= 186 && weight < 86) {
                     size = 'L';
-                } else if (height <= 200 && weight <= 95) {
+                } else if (height <= 190 && weight < 93) {
                     size = 'XL';
-                } else {
+                } else if (height >= 200 || weight >= 110) {
                     size = 'XXL';
                 }
 
                 result.textContent = `Size uygun beden: ${size}`;
             }
 
-            // Slider'lara event listener ekleme
             heightSlider.addEventListener('input', updateValues);
             weightSlider.addEventListener('input', updateValues);
 
-            // Butona tıklama event listener ekleme
             findSizeButton.addEventListener('click', findSize);
 
-            // Sayfa yüklendiğinde slider değerlerini güncelle
             updateValues();
         });
     </script>
