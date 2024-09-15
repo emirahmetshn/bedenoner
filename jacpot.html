@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jackpot İndirimi</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0;
+        }
+        .jackpot-container {
+            width: 350px;
+            background-color: #f8f8f8;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
+            border: 2px solid #ddd; /* Kenarlık ekleyerek daha fazla kontrast */
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 28px;
+        }
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .slot {
+            width: 100px;
+            height: 100px;
+            margin: 0 15px;
+            background-color: #333333;
+            color: white;
+            font-size: 36px;
+            line-height: 100px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .slot.spin {
+            animation: spin 0.4s linear infinite;
+        }
+        .slot.stop {
+            animation: bounce 0.5s ease;
+        }
+        #discount {
+            font-size: 28px;
+            color: #27ae60;
+            margin: 20px 0;
+        }
+        button {
+            padding: 15px 30px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+        p {
+            font-size: 14px;
+            color: #888;
+        }
+        @keyframes spin {
+            0% { transform: rotateX(0); }
+            100% { transform: rotateX(360deg); }
+        }
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes flash {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .flashing-text {
+            animation: flash 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="jackpot-container">
+            <h1>Jackpot İndirimi</h1>
+            <p>Slot makinesini çevirin ve %15'e kadar indirim kazanın!</p>
+
+            <div class="slot-machine">
+                <div class="slot" id="slot1">?</div>
+                <div class="slot" id="slot2">?</div>
+                <div class="slot" id="slot3">?</div>
+            </div>
+
+            <div id="discount" class="flashing-text">İndirim: %0</div>
+
+            <button id="spinButton" onclick="spin()">Çevir</button>
+            <p>Tek çevirme hakkınız var!</p>
+        </div>
+    </div>
+
+    <script>
+        let hasSpun = false;
+
+        function getRandomNumber() {
+            const numbers = [5, 10, 15, 20];
+            return numbers[Math.floor(Math.random() * numbers.length)];
+        }
+
+        function spin() {
+            if (hasSpun) return; // Eğer daha önce çevirildiyse, ikinci çevirme engellenir
+
+            hasSpun = true; // Çevirme yapıldı olarak işaretlenir
+
+            let spinButton = document.getElementById('spinButton');
+            spinButton.classList.add('disabled'); // Buton devre dışı bırakılır
+            spinButton.innerHTML = 'Çevrildi'; // Butonun içeriği güncellenir
+
+            let slot1 = document.getElementById("slot1");
+            let slot2 = document.getElementById("slot2");
+            let slot3 = document.getElementById("slot3");
+
+            // İlk olarak tüm slotlar döner
+            slot1.classList.add('spin');
+            slot2.classList.add('spin');
+            slot3.classList.add('spin');
+
+            // Her slotun değerini sırasıyla doldurma
+            setTimeout(() => {
+                let result1 = getRandomNumber();
+                slot1.innerHTML = result1;
+                slot1.classList.remove('spin');
+                slot1.classList.add('stop');
+            }, 1000); // 1 saniye sonra sol slot durur
+
+            setTimeout(() => {
+                let result2 = getRandomNumber();
+                slot2.innerHTML = result2;
+                slot2.classList.remove('spin');
+                slot2.classList.add('stop');
+            }, 1500); // 1.5 saniye sonra orta slot durur
+
+            setTimeout(() => {
+                let result3 = getRandomNumber();
+                slot3.innerHTML = result3;
+                slot3.classList.remove('spin');
+                slot3.classList.add('stop');
+
+                // Üç slot eşleşti mi kontrol etme
+                if (slot1.innerHTML === slot2.innerHTML && slot2.innerHTML === slot3.innerHTML) {
+                    document.getElementById("discount").innerHTML = "Tebrikler kazandınız! İndirim: %" + slot1.innerHTML;
+                } else {
+                    document.getElementById("discount").innerHTML = "Kazanamadınız ama bizden %10 indirim hediye!";
+                }
+            }, 2000); // 2 saniye sonra sağ slot durur
+        }
+    </script>
+
+</body>
+</html>
