@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beden Hesaplama</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #ffffff; /* Tam beyaz arka plan */
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: hidden; /* Kaydırma çubuğu olmaması için */
+        }
+
+        .tab-container {
+            width: 1200px; /* Enine genişlik */
+            height: 400px; /* Dikine yükseklik */
+            background-color: #ffffff; /* İçerik arka plan rengi */
+            border-radius: 10px;
+            box-shadow: none; /* Gölgeyi kaldır */
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 0; /* İçerik alanının tam olarak sığması için */
+            margin-top: 10px; /* Sayfanın üst kısmında biraz boşluk bırak */
+            overflow-y: hidden; /* Kaydırma çubuğunu gizle */
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: flex-start;
+            background: #f4f4f4;
+            border-bottom: 2px solid #ddd;
+            height: 50px; /* Sekme yüksekliği */
+        }
+
+        .tab {
+            padding: 10px 20px; /* Sekme içi boşluk */
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            transition: border-color 0.3s ease;
+            border-radius: 5px 5px 0 0; /* Üst köşelere yuvarlatma */
+            background: #e0e0e0;
+            font-size: 16px; /* Sekme font boyutu */
+            display: flex;
+            align-items: center; /* İçeriği dikey ortala */
+        }
+
+        .tab.active {
+            border-bottom: 2px solid #000;
+            font-weight: 600;
+            background: #ffffff; /* Aktif sekme arka plan rengi */
+        }
+
+        .tab-content {
+            padding: 10px 15px;
+            flex: 1; /* İçeriği tüm alanı kaplayacak şekilde ayarla */
+            display: none;
+            overflow-y: auto; /* İçeriğin kaydırılabilir olması için */
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 18px; /* Başlık font boyutu */
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .slider-container {
+            margin: 10px 0;
+        }
+
+        label {
+            font-size: 12px; /* Etiket font boyutu */
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+
+        .slider {
+            width: 100%;
+            appearance: none;
+            background: #ddd;
+            height: 4px; /* Kaydırıcı yüksekliği */
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            background: #000;
+            height: 16px; /* Kaydırıcı parmağı yüksekliği */
+            width: 16px; /* Kaydırıcı parmağı genişliği */
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            background: #000;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .label {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 10px; /* Etiket değer font boyutu */
+        }
+
+        .button {
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            padding: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Buton font boyutu */
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #444;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-size: 14px; /* Sonuç font boyutu */
+            font-weight: bold;
+            text-align: center;
+            color: #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 12px; /* Tablo font boyutu */
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tab-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="tab1">Bedenimi Bul</div>
+            <div class="tab" data-tab="tab2">Beden Tablosu</div>
+        </div>
+
+        <div id="tab1" class="tab-content active">
+            <h1>Bedenimi Bul</h1>
+            <div class="slider-container">
+                <label for="height">Boy (cm)</label>
+                <input type="range" id="height" class="slider" min="160" max="215" value="179">
+                <div class="label">
+                    <span>160</span>
+                    <span id="heightValue">179</span>
+                    <span>215</span>
+                </div>
+            </div>
+
+            <div class="slider-container">
+                <label for="weight">Kilo (kg)</label>
+                <input type="range" id="weight" class="slider" min="50" max="125" value="70">
+                <div class="label">
+                    <span>50</span>
+                    <span id="weightValue">70</span>
+                    <span>125</span>
+                </div>
+            </div>
+
+            <button class="button" id="findSizeButton">Beden Bul</button>
+
+            <div class="result" id="result">Size uygun beden: -</div>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <h1>Beden Tablosu</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Beden</th>
+                        <th>Bel (cm)</th>
+                        <th>Boy (Bel lastiği dahil) (cm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S</td>
+                        <td>46</td>
+                        <td>42</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>49</td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>50</td>
+                        <td>46</td>
+                    </tr>
+                    <tr>
+                        <td>XL</td>
+                        <td>52</td>
+                        <td>49</td>
+                    </tr>
+                    <tr>
+                        <td>XXL</td>
+                        <td>53</td>
+                        <td>50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heightSlider = document.getElementById('height');
+            const weightSlider = document.getElementById('weight');
+            const heightValue = document.getElementById('heightValue');
+            const weightValue = document.getElementById('weightValue');
+            const result = document.getElementById('result');
+            const findSizeButton = document.getElementById('findSizeButton');
+
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // Tab switching functionality
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const target = tab.getAttribute('data-tab');
+                    tabContents.forEach(tc => {
+                        tc.classList.remove('active');
+                        if (tc.id === target) {
+                            tc.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Slider değerlerini güncelle
+            function updateValues() {
+                heightValue.textContent = heightSlider.value;
+                weightValue.textContent = weightSlider.value;
+            }
+
+            // Beden hesaplama fonksiyonu
+            function findSize() {
+                const height = parseInt(heightSlider.value, 10);
+                const weight = parseInt(weightSlider.value, 10);
+                let size = '';
+
+                // Güncellenmiş beden aralıkları
+                if (height <= 172 && weight < 67) {
+                    size = 'S';
+                } else if (height <= 180 && weight < 75) {
+                    size = 'M';
+                } else if (height <= 186 && weight < 86) {
+                    size = 'L';
+                } else if (height <= 190 && weight < 93) {
+                    size = 'XL';
+                } else if (height > 190 || weight >= 110) {
+                    size = 'XXL';
+                } else {
+                    size = 'Beden önerilemiyor'; // Aralıklara uymayan durumlar için
+                }
+
+                // Sonucu doğrudan sayfada gösterme
+                result.textContent = `Size uygun beden: ${size}`;
+            }
+
+            heightSlider.addEventListener('input', updateValues);
+            weightSlider.addEventListener('input', updateValues);
+            findSizeButton.addEventListener('click', findSize);
+
+            // Başlangıç değerlerini güncelle
+            updateValues();
+        });
+    </script>
+
+</body>
+</html>
