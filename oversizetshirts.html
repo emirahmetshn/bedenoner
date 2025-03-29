@@ -298,30 +298,8 @@
                 // Güncellenmiş beden aralıkları
                 if (height <= 172 && weight < 67) {
                     size = 'S';
-                } else if (height <= 180 && weight < 75) {
+                } else if (height <= 180 && weight <= 80) { // 80kg'a kadar M önerilsin
                     size = 'M';
                 } else if (height <= 186 && weight < 86) {
                     size = 'L';
-                } else if (height <= 190 && weight < 93) {
-                    size = 'XL';
-                } else if (height > 190 || weight >= 110) {
-                    size = 'XXL';
-                } else {
-                    size = 'Beden önerilemiyor'; // Aralıklara uymayan durumlar için
-                }
-
-                // Sonucu doğrudan sayfada gösterme
-                result.textContent = `Size uygun beden: ${size}`;
-            }
-
-            heightSlider.addEventListener('input', updateValues);
-            weightSlider.addEventListener('input', updateValues);
-            findSizeButton.addEventListener('click', findSize);
-
-            // Başlangıç değerlerini güncelle
-            updateValues();
-        });
-    </script>
-
-</body>
-</html>
+                } else if (height <=
