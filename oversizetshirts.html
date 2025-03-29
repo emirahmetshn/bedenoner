@@ -192,7 +192,7 @@
                 <div class="label">
                     <span>160</span>
                     <span id="heightValue">179</span>
-                    <span>215</span>
+                    <span>200</span>
                 </div>
             </div>
 
@@ -202,7 +202,7 @@
                 <div class="label">
                     <span>50</span>
                     <span id="weightValue">70</span>
-                    <span>125</span>
+                    <span>100</span>
                 </div>
             </div>
 
@@ -261,45 +261,4 @@
             const weightSlider = document.getElementById('weight');
             const heightValue = document.getElementById('heightValue');
             const weightValue = document.getElementById('weightValue');
-            const result = document.getElementById('result');
-            const findSizeButton = document.getElementById('findSizeButton');
-
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            // Tab switching functionality
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-
-                    const target = tab.getAttribute('data-tab');
-                    tabContents.forEach(tc => {
-                        tc.classList.remove('active');
-                        if (tc.id === target) {
-                            tc.classList.add('active');
-                        }
-                    });
-                });
-            });
-
-            // Slider değerlerini güncelle
-            function updateValues() {
-                heightValue.textContent = heightSlider.value;
-                weightValue.textContent = weightSlider.value;
-            }
-
-            // Beden hesaplama fonksiyonu
-            function findSize() {
-                const height = parseInt(heightSlider.value, 10);
-                const weight = parseInt(weightSlider.value, 10);
-                let size = '';
-
-                // Güncellenmiş beden aralıkları
-                if (height <= 172 && weight < 67) {
-                    size = 'S';
-                } else if (height <= 180 && weight <= 80) { // 80kg'a kadar M önerilsin
-                    size = 'M';
-                } else if (height <= 186 && weight < 86) {
-                    size = 'L';
-                } else if (height <=
+            const result = document.getElementById
