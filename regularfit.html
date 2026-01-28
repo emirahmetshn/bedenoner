@@ -147,6 +147,13 @@
             color: #000;
         }
 
+        .suggestion {
+            font-size: 12px;
+            text-align: center;
+            color: #555;
+            margin-top: 10px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -202,6 +209,9 @@
             <button class="button" id="findSizeButton">Beden Bul</button>
 
             <div class="result" id="result">Size uygun beden: -</div>
+
+            <!-- Eklenen yazı -->
+            <p class="suggestion">Öneriler vücudunuza oturacak şekilde yapılmaktadır, vücut tipinize göre değişiklik gösterebilir kesin değildir.</p>
         </div>
 
         <div id="tab2" class="tab-content">
@@ -242,6 +252,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p class="suggestion">Ölçüler +1/-1cm oynayabilir, yaklaşık değerlerdir.</p>
         </div>
     </div>
 
@@ -279,25 +290,25 @@
                 weightValue.textContent = weightSlider.value;
             }
 
-            // Beden hesaplama fonksiyonu
+            // Beden hesaplama fonksiyonu (2. koddan alınan değerler)
             function findSize() {
                 const height = parseInt(heightSlider.value, 10);
                 const weight = parseInt(weightSlider.value, 10);
                 let size = '';
 
-                // Güncellenmiş beden aralıkları
-                if (height <= 172 && weight < 67) {
+                // 2. koddan alınan beden aralıkları
+                if (height <= 175 && weight <= 70) {
                     size = 'S';
-                } else if (height <= 180 && weight < 75) {
+                } else if (height <= 185 && weight <= 80) {
                     size = 'M';
-                } else if (height <= 186 && weight < 86) {
+                } else if (height <= 190 && weight <= 90) {
                     size = 'L';
-                } else if (height <= 190 && weight < 93) {
+                } else if (height <= 195 && weight <= 100) {
                     size = 'XL';
-                } else if (height > 190 || weight >= 110) {
+                } else if (height > 195 || weight > 100) {
                     size = 'XXL';
                 } else {
-                    size = 'Beden önerilemiyor'; // Aralıklara uymayan durumlar için
+                    size = 'Beden önerilemiyor';
                 }
 
                 // Sonucu doğrudan sayfada gösterme
