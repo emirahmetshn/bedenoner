@@ -211,7 +211,7 @@
             <div class="result" id="result">Size uygun beden: -</div>
 
             <!-- Eklenen yazı -->
-            <p class="suggestion">Önerilen beden size oversize olacak şekilde önerilmektedir. Vücudunuza daha çok oturmasını isterseniz bir küçük beden tercih edebilirsiniz.</p>
+            <p class="suggestion">Ölçüler oversize duracak şekilde tahminidir, vücut tipinize göre değişebilir.</p>
         </div>
 
         <div id="tab2" class="tab-content">
@@ -252,6 +252,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p class="suggestion">Ölçüler +1/-1cm oynayabilir, yaklaşık değerlerdir.</p>
         </div>
     </div>
 
@@ -289,25 +290,25 @@
                 weightValue.textContent = weightSlider.value;
             }
 
-            // Beden hesaplama fonksiyonu
+            // Beden hesaplama fonksiyonu (2. koddan alınan değerler)
             function findSize() {
                 const height = parseInt(heightSlider.value, 10);
                 const weight = parseInt(weightSlider.value, 10);
                 let size = '';
 
-                // Güncellenmiş beden aralıkları
-                if (height <= 172 && weight < 67) {
+                // 2. koddan alınan beden aralıkları
+                if (height <= 175 && weight <= 70) {
                     size = 'S';
-                } else if (height <= 180 && weight < 79) {
+                } else if (height <= 185 && weight <= 80) {
                     size = 'M';
-                } else if (height <= 186 && weight < 86) {
+                } else if (height <= 190 && weight <= 90) {
                     size = 'L';
-                } else if (height <= 190 && weight < 93) {
+                } else if (height <= 195 && weight <= 100) {
                     size = 'XL';
-                } else if (height > 190 || weight >= 100) {
+                } else if (height > 195 || weight > 100) {
                     size = 'XXL';
                 } else {
-                    size = 'Beden önerilemiyor'; // Aralıklara uymayan durumlar için
+                    size = 'Beden önerilemiyor';
                 }
 
                 // Sonucu doğrudan sayfada gösterme
