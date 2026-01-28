@@ -81,10 +81,10 @@
     }
 
     .tab-content {
-      padding: 5px 15px;
+      padding: 10px 15px;
       flex: 1;
       display: none;
-      overflow-y: hidden;
+      overflow-y: auto;
     }
 
     .tab-content.active {
@@ -103,8 +103,8 @@
     }
 
     label {
-      font-size: 14px;
-      margin-bottom: 8px;
+      font-size: 12px;
+      margin-bottom: 5px;
       display: block;
       color: #555;
     }
@@ -139,20 +139,20 @@
     .label {
       display: flex;
       justify-content: space-between;
-      margin-top: 8px;
-      font-size: 11px;
+      margin-top: 5px;
+      font-size: 10px;
     }
 
     .button {
       width: 100%;
       background-color: #000;
       color: #fff;
-      padding: 12px 0;
+      padding: 10px 0;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 15px;
-      margin-top: 8px;
+      font-size: 14px;
+      margin-top: 15px;
       transition: background-color 0.3s;
     }
 
@@ -161,8 +161,8 @@
     }
 
     .result {
-      margin-top: 5px;
-      font-size: 16px;
+      margin-top: 10px;
+      font-size: 14px;
       font-weight: bold;
       text-align: center;
       color: #000;
@@ -172,8 +172,8 @@
       width: 100%;
       max-width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
-      font-size: 13px;
+      margin-top: 10px;
+      font-size: 12px;
       table-layout: fixed;
     }
 
@@ -182,7 +182,7 @@
     }
 
     th, td {
-      padding: 8px;
+      padding: 5px;
       text-align: center;
       word-wrap: break-word;
     }
@@ -193,7 +193,7 @@
     }
 
     .note {
-      margin-top: 5px;
+      margin-top: 10px;
       font-size: 11px;
       font-style: italic;
       color: #666;
@@ -202,46 +202,45 @@
 
     @media (max-width: 768px) {
       body, html {
-        align-items: center;
-        overflow: auto;
+        align-items: flex-start;
+        overflow: hidden;
       }
 
       .tab-container {
-        width: 95%;
-        height: auto;
-        min-height: 400px;
-        max-width: 500px;
+        width: 1200px;
+        height: 400px;
+        max-width: none;
         padding: 0;
-        margin: 15px auto;
-        overflow-y: visible;
+        margin: 10px;
+        overflow-y: hidden;
       }
 
       .tabs {
-        height: 45px;
+        height: 50px;
       }
 
       .tab {
-        padding: 8px 16px;
-        font-size: 14px;
+        padding: 10px 20px;
+        font-size: 16px;
       }
 
       .tab-content {
-        padding: 15px 20px;
-        overflow-y: visible;
+        padding: 10px 15px;
+        overflow-y: auto;
       }
 
       h1 {
-        font-size: 16px;
-        margin-bottom: 15px;
-        margin-top: 10px;
+        font-size: 18px;
+        margin-bottom: 10px;
+        margin-top: 5px;
       }
 
       .slider-container {
-        margin: 12px 0;
+        margin: 8px 0;
       }
 
       label {
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .label {
@@ -251,12 +250,12 @@
       .button {
         padding: 10px 0;
         font-size: 14px;
-        margin-top: 12px;
+        margin-top: 15px;
       }
 
       .result {
-        font-size: 15px;
-        margin-top: 8px;
+        font-size: 14px;
+        margin-top: 10px;
       }
 
       .note {
@@ -266,32 +265,12 @@
       }
 
       table {
-        font-size: 11px;
+        font-size: 12px;
         margin-top: 10px;
       }
 
       th, td {
-        padding: 6px 4px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .tab-container {
-        width: 98%;
-        margin: 10px auto;
-      }
-
-      .tab {
-        padding: 6px 12px;
-        font-size: 13px;
-      }
-
-      h1 {
-        font-size: 15px;
-      }
-
-      .tab-content {
-        padding: 12px 15px;
+        padding: 5px;
       }
     }
   </style>
